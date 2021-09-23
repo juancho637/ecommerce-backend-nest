@@ -217,4 +217,7 @@ $RECYCLE.BIN/
 .settings/
 *.sublime-workspace
 
+# Docker
+/postgres_data
+
 # End of https://www.toptal.com/developers/gitignore/api/node,macos,windows,linux,visualstudiocode
