@@ -1,5 +1,6 @@
 import {
   IsEnum,
+  IsNotEmpty,
   IsNumber,
   IsString,
   IsUrl,
@@ -15,15 +16,19 @@ enum Environment {
 }
 
 class EnvironmentValidations {
+  @IsNotEmpty()
   @IsEnum(Environment)
   NODE_ENV: Environment;
 
+  @IsNotEmpty()
   @IsNumber()
   PORT: number;
 
+  @IsNotEmpty()
   @IsString()
   APP_NAME: string;
 
+  @IsNotEmpty()
   @IsUrl()
   APP_URL: string;
 }
