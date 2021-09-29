@@ -31,6 +31,14 @@ class EnvironmentValidations {
   @IsNotEmpty()
   @IsUrl()
   APP_URL: string;
+
+  @IsNotEmpty()
+  @IsString()
+  DB_DEFAULT_DRIVER: string;
+
+  @IsNotEmpty()
+  @IsString()
+  DB_DEFAULT_URL: string;
 }
 
 export function validate(config: Record<string, unknown>) {
