@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { appConfig, databaseConfig, validate } from './config';
 import { TypeOrmConfigService } from './services/typeorm-config.service';
+import { StatusesModule } from './api/statuses/statuses.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { TypeOrmConfigService } from './services/typeorm-config.service';
       inject: [ConfigService],
       useClass: TypeOrmConfigService,
     }),
+    StatusesModule,
   ],
   controllers: [],
   providers: [],
