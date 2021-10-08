@@ -6,19 +6,22 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
+import { StatusAbbreviations } from '../enums/status-abbreviations.enum';
+import { StatusTypes } from '../enums/status-types.enum';
+
 @Entity({ name: 'statuses' })
 export class Status {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  abbreviation: string;
+  abbreviation: StatusAbbreviations;
+
+  @Column()
+  type: StatusTypes;
 
   @Column()
   description: string;
-
-  @Column()
-  type: string;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
