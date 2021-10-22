@@ -2,6 +2,7 @@ import { NestFactory, Reflector } from '@nestjs/core';
 import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { useContainer } from 'class-validator';
 
 import { AppModule } from './app.module';
 
@@ -28,6 +29,8 @@ async function bootstrap() {
       },
     }),
   );
+
+  useContainer(app.select(AppModule), { fallbackOnErrors: true });
 
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
 
