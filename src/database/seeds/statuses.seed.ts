@@ -20,7 +20,7 @@ export default class CreateStatuses implements Seeder {
           description: 'active resource',
         },
         {
-          name: StatusNames.GEN_ACTIVE_STATUS,
+          name: StatusNames.GEN_INACTIVE_STATUS,
           type: StatusTypes.GENERAL_STATUSES,
           abbreviation: StatusAbbreviations.GEN_INACTIVE_STATUS,
           description: 'inactive resource',
