@@ -6,6 +6,7 @@ import { appConfig, databaseConfig, validate } from './config';
 import { TypeOrmConfigService } from './services/typeorm-config.service';
 import { StatusesModule } from './api/statuses/statuses.module';
 import { RolesModule } from './api/roles/roles.module';
+import { UsersModule } from './api/users/users.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { RolesModule } from './api/roles/roles.module';
     }),
     StatusesModule,
     RolesModule,
+    UsersModule,
   ],
   controllers: [],
   providers: [],
