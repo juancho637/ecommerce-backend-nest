@@ -6,10 +6,6 @@ import {
   IsString,
 } from 'class-validator';
 
-import { Role } from '../../roles/entities/role.entity';
-import { IsRolesAlreadyExist } from '../decorators/is-roles-already-exist.decorator';
-import { IsUserAlreadyExist } from '../decorators/is-user-already-exist.decorator';
-
 export class CreateUserDto {
   @IsNotEmpty()
   @IsString()
@@ -17,7 +13,6 @@ export class CreateUserDto {
 
   @IsNotEmpty()
   @IsEmail()
-  @IsUserAlreadyExist()
   email: string;
 
   @IsNotEmpty()
@@ -27,6 +22,5 @@ export class CreateUserDto {
   @IsNotEmpty()
   @IsArray()
   @ArrayMinSize(1)
-  @IsRolesAlreadyExist()
-  roles: Role[];
+  roles: number[];
 }
