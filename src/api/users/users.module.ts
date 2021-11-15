@@ -7,9 +7,6 @@ import { UsersService } from './users.service';
 import { UsersController } from './users.controller';
 import { StatusesModule } from '../statuses/statuses.module';
 import { RolesModule } from '../roles/roles.module';
-import { IsRolesAlreadyExistConstraint } from './decorators/is-roles-already-exist.decorator';
-import { IsUserAlreadyExistConstraint } from './decorators/is-user-already-exist.decorator';
-import { IsStatusAlreadyExistConstraint } from './decorators/is-status-already-exist.decorator';
 
 @Module({
   imports: [
@@ -19,12 +16,7 @@ import { IsStatusAlreadyExistConstraint } from './decorators/is-status-already-e
     RolesModule,
   ],
   controllers: [UsersController],
-  providers: [
-    IsUserAlreadyExistConstraint,
-    IsRolesAlreadyExistConstraint,
-    IsStatusAlreadyExistConstraint,
-    UsersService,
-  ],
+  providers: [UsersService],
   exports: [TypeOrmModule],
 })
 export class UsersModule {}
