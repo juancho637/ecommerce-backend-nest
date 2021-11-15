@@ -2,7 +2,6 @@ import {
   Column,
   Entity,
   PrimaryGeneratedColumn,
-  BeforeInsert,
   ManyToMany,
   JoinTable,
   ManyToOne,
@@ -10,8 +9,6 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Exclude } from 'class-transformer';
-import * as bcrypt from 'bcrypt';
 
 import { Role } from '../../roles/entities/role.entity';
 import { Status } from '../../statuses/entities/status.entity';
@@ -27,7 +24,6 @@ export class User {
   @Column({ name: 'email' })
   email: string;
 
-  @Exclude()
   @Column({ name: 'password' })
   password: string;
 
@@ -52,10 +48,4 @@ export class User {
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
-
-  @BeforeInsert()
-  async setPassword(password: string) {
-    const salt = await bcrypt.genSalt();
-    this.password = await bcrypt.hash(password || this.password, salt);
-  }
 }
