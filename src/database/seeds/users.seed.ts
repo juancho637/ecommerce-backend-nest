@@ -21,7 +21,8 @@ export default class CreateUsers implements Seeder {
     const adminUser = new User();
     adminUser.fullName = 'Juan David Garcia';
     adminUser.email = 'juancho637@gmail.com';
-    adminUser.password = 'secret';
+    adminUser.password =
+      '$2b$10$il8N39SIEvOLvYlPK.pajOFeNIQSvukD0R9/MB3by9jIRaVCN7sbS'; // secret
     adminUser.status = activeStatus;
     adminUser.roles = [adminRole];
     await em.save(adminUser);
@@ -32,7 +33,8 @@ export default class CreateUsers implements Seeder {
     const customerUser = new User();
     customerUser.fullName = 'customer1';
     customerUser.email = 'customer1@example.com';
-    customerUser.password = 'secret';
+    customerUser.password =
+      '$2b$10$il8N39SIEvOLvYlPK.pajOFeNIQSvukD0R9/MB3by9jIRaVCN7sbS'; // secret
     customerUser.status = activeStatus;
     customerUser.roles = [customerRole];
     await em.save(customerUser);
