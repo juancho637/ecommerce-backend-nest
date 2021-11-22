@@ -6,35 +6,12 @@ import { UsersModule } from '../src/api/users/users.module';
 import { UsersRepository } from '../src/api/users/users.repository';
 import { StatusesRepository } from '../src/api/statuses/statuses.repository';
 import { RolesRepository } from '../src/api/roles/roles.repository';
-import { RoleNames } from '../src/api/roles/enums/role-names.enum';
-import { StatusTypes } from '../src/api/statuses/enums/status-types.enum';
-import { StatusNames } from '../src/api/statuses/enums/status-names.enum';
-import { StatusAbbreviations } from '../src/api/statuses/enums/status-abbreviations.enum';
+import { mockUsers } from './mocks/users.mock';
+import { mockStatuses } from './mocks/statuses.mock';
+import { mockRoles } from './mocks/roles.mock';
 
 describe('UsersController (e2e)', () => {
   let app: INestApplication;
-  let mockUsers = [
-    { id: 1, fullName: 'example one', email: 'exampleone@example.com' },
-    { id: 2, fullName: 'example two', email: 'exampletwo@example.com' },
-  ];
-  const mockRoles = [
-    { id: 1, name: RoleNames.ADMIN_ROLE },
-    { id: 2, name: RoleNames.CUSTOMER_ROLE },
-  ];
-  const mockStatuses = [
-    {
-      id: 1,
-      name: StatusNames.GEN_ACTIVE_STATUS,
-      abbreviation: StatusAbbreviations.GEN_ACTIVE_STATUS,
-      type: StatusTypes.GENERAL_STATUSES,
-    },
-    {
-      id: 2,
-      name: StatusNames.GEN_INACTIVE_STATUS,
-      abbreviation: StatusAbbreviations.GEN_INACTIVE_STATUS,
-      type: StatusTypes.GENERAL_STATUSES,
-    },
-  ];
 
   const mockUsersRepository = {
     findOneByEmail: jest.fn().mockImplementation((userEmail) => {
@@ -64,9 +41,9 @@ describe('UsersController (e2e)', () => {
     }),
     delete: jest.fn().mockImplementation((id) => {
       const usersCount = mockUsers.length;
-      mockUsers = mockUsers.filter((user) => user.id !== id);
+      const currentUsers = mockUsers.filter((user) => user.id !== id);
 
-      if (mockUsers.length === usersCount - 1) {
+      if (currentUsers.length === usersCount - 1) {
         return true;
       } else {
         return false;
@@ -137,7 +114,14 @@ describe('UsersController (e2e)', () => {
     return request(app.getHttpServer())
       .get('/users/' + user.id)
       .expect(200)
-      .expect(user);
+      .expect((response: request.Response) => {
+        const { id, fullName, password, email } = response.body;
+
+        expect(typeof id).toBe('number');
+        expect(fullName).toEqual(user.fullName);
+        expect(email).toEqual(user.email);
+        expect(password).toBeUndefined();
+      });
   });
 
   it('/users (POST)', () => {
@@ -188,6 +172,13 @@ describe('UsersController (e2e)', () => {
     return request(app.getHttpServer())
       .delete('/users/' + user.id)
       .expect(200)
-      .expect(user);
+      .expect((response: request.Response) => {
+        const { id, fullName, password, email } = response.body;
+
+        expect(typeof id).toBe('number');
+        expect(fullName).toEqual(user.fullName);
+        expect(email).toEqual(user.email);
+        expect(password).toBeUndefined();
+      });
   });
 });
