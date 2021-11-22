@@ -29,7 +29,7 @@ export class UsersService extends FilterService<User, FilterUsersDto> {
   }
 
   async create(createUserDto: CreateUserDto): Promise<User> {
-    const salt = await bcrypt.genSalt(10);
+    const salt = await bcrypt.genSalt();
     createUserDto.password = await bcrypt.hash(createUserDto.password, salt);
 
     const userByEmail = await this.usersRepository.findOneByEmail(
